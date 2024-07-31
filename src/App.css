@@ -1,4 +1,4 @@
-.App {
+.wrapper {
   text-align: center;
   min-height: 100vh;
   display: flex;
@@ -8,3 +8,8 @@
   font-size: calc(10px + 2vmin);
 }
 
+#preview{
+  border: 2px solid gray;
+  height: 20em;
+  width: 40em;
+}
