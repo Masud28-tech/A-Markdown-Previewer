@@ -1,6 +1,12 @@
-import { useState } from 'react';
-import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
-import './App.css';
+import { useState } from "react";
+import { marked } from "marked";
+import "./App.css";
+
+marked.setOptions({
+  breaks: true
+});
+
+const renderMarkdown = new marked.Renderer();
 
 const defaultMarkdown = `
 # Heading 1
@@ -33,20 +39,21 @@ function App() {
 
   const handleTextChange = (e) => {
     setText(e.target.value);
-  }
+  };
 
   return (
     <div className="wrapper">
       <h2>A Markdown Previewer Made By Masud</h2>
-      <div className='editor-box'>
+      <div className="editor-box">
         <h6>Editor</h6>
-        <textarea id='editor' value={text} onChange={handleTextChange}></textarea>
+        <textarea id="editor" value={text} onChange={handleTextChange}>
+        </textarea>
       </div>
-      <div className='preview-box'>
+      <div className="preview-box">
         <h6>Preview</h6>
-        <div id='preview'>
-          {marked.parse(text)}
-        </div>
+        <div id="preview" dangerouslySetInnerHTML={{
+          __html: marked(text, { renderer: renderMarkdown })
+        }}></div>
       </div>
     </div>
   );
